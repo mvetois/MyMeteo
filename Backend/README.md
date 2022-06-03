@@ -56,9 +56,9 @@ $> npm run test:ci
 
 ## Useful links
 
-- API [http://localhost:3000/api](http://localhost:3000/)
-- Documentation [http://localhost:3000/doc](http://localhost:3000/doc)
-- Database viewer [http://localhost:3001](http://localhost:3001)
+- API [http://localhost:5000/api](http://localhost:5000/)
+- Documentation [http://localhost:5000/doc](http://localhost:5000/doc)
+- Database viewer [http://localhost:5001](http://localhost:5001)
 
 # Project Members
 - [Matthieu VETOIS](https://github.com/mvetois)

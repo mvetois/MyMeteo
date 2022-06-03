@@ -6,7 +6,7 @@ import SwaggerOptions from "./utils/swagger";
 import API from "./routes/index";
 
 const app : Express = express();
-const port : number = 3000;
+const port : number = 5000;
 
 app.listen(port, () => {
     console.log("Server is running on port " + port);

@@ -23,7 +23,7 @@ services:
             ME_CONFIG_MONGODB_ADMINPASSWORD: password
             ME_CONFIG_MONGODB_SERVER: mongodb
         ports:
-            - 3001:8081
+            - 5001:8081
         networks:
             - mongo-compose-network
         volumes:
