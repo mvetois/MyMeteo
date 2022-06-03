@@ -15,3 +15,5 @@ app.listen(port, () => {
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(SwaggerOptions)));
 
 app.use("/api", API);
+
+export default app;
