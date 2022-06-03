@@ -1,5 +1,7 @@
 import { Router, Request, Response } from "express";
 
+import Cities from "./cities";
+
 const router : Router = Router();
 
 /**
@@ -22,5 +24,7 @@ const router : Router = Router();
 router.get("/", (req : Request, res : Response) => {
     return (res.status(200).json({message: "API is running"}));
 });
+
+router.use("/cities", Cities);
 
 export default router;
