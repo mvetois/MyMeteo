@@ -16,7 +16,7 @@ interface DataCity {
 };
 
 const getCities = async (): Promise<DataCity[]> => {
-    const result: AxiosResponse<DataCity[], any> = await axios.get("https://geo.api.gouv.fra/communes?fields=nom,code,codesPostaux,centre,departement").catch((err) => err);
+    const result: AxiosResponse<DataCity[], any> = await axios.get("https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,centre,departement").catch((err) => err);
     return (result.data);
 };
 
