@@ -20,7 +20,7 @@ const router : Router = Router();
  *               example: API is running
  */
 router.get("/", (req : Request, res : Response) => {
-    return (res.status(200).send("API is running"));
+    return (res.status(200).json({message: "API is running"}));
 });
 
 export default router;
