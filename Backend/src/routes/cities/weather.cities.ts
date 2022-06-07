@@ -30,9 +30,12 @@ const getWeather = async (lat: string, lon: string): Promise<any> => {
  *         description: Sucess !
  *         content:
  *           application/json:
- *             message:
- *               type: string
- *               description: Sucess message.
+ *             data:
+ *               type: array
+ *               description: Weather data.
+ *             city:
+ *               type: array
+ *               description: City data.
  *       400:
  *         description: Bad request !
  *         content:
@@ -55,8 +58,8 @@ router.get("/", async (req : Request, res : Response) => {
     var citiesList : ICities[] =  await Cities.find({code: req.query.code}, {"_id": false, "__v": false}).catch((err) => err);
     if (!citiesList || citiesList.length === 0)
         return (res.status(400).json({message: "City not found"}));
-    const x = await getWeather(String(citiesList[0].coord[0]), String(citiesList[0].coord[1]));
-    return (res.status(200).send(x));
+    const result : any = await getWeather(String(citiesList[0].coord[0]), String(citiesList[0].coord[1]));
+    return (res.status(200).json({data: result, city: citiesList[0]}));
 });
 
 export default router;
