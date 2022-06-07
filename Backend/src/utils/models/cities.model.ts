@@ -1,5 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 
+export interface ICities {
+    name: string;
+    code: string;
+    codePst: string[];
+    codeDpt: string;
+    nameDpt: string;
+    coord: number[];
+}
+
 const CitiesSchema : Schema = new Schema({
     name: {
         type: String,
