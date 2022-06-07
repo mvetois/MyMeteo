@@ -1,0 +1,43 @@
+{
+  "name": "mymeteo-backend",
+  "version": "1.0.0",
+  "description": "Project used to display local weather on mobile app and chrome extension",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/src/index.js",
+    "test:ci": "mocha -r ts-node/register tests/**/*.test.ts --exit --timeout 600000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvetois/MyMeteo.git"
+  },
+  "author": "mvetois",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mvetois/MyMeteo/issues"
+  },
+  "homepage": "https://github.com/mvetois/MyMeteo#readme",
+  "devDependencies": {
+    "@types/chai": "^4.3.1",
+    "@types/express": "^4.17.13",
+    "@types/mocha": "^9.1.1",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^17.0.38",
+    "@types/supertest": "^2.0.12",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "supertest": "^6.2.3",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.5",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.4.0"
+  }
+}
