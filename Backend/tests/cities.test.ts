@@ -29,13 +29,31 @@ describe("GET - Find cities with name or postal code", () => {
         expect(response.status).to.equal(400);
     });
     it("Sucess when you enter a valid postal code", async () => {
-        const response : any = await supertest(app).get("/api/cities/find?param='67000");
+        const response : any = await supertest(app).get("/api/cities/find?param=67000");
+
+        expect(response.status).to.equal(200);
+    });
+    it("Sucess when you enter a valid city name", async () => {
+        const response : any = await supertest(app).get("/api/cities/find?param=strasbourg");
+
+        expect(response.status).to.equal(200);
+    });
+});
+
+describe("GET - Get the cities current weather", () => {
+    it("Error when you don't enter a code ", async () => {
+        const response : any = await supertest(app).get("/api/cities/weather");
 
         expect(response.status).to.equal(400);
     });
-    it("Sucess when you enter a valid city name", async () => {
-        const response : any = await supertest(app).get("/api/cities/find?param='strasbourg");
+    it("Error when you don't enter an undefined code ", async () => {
+        const response : any = await supertest(app).get("/api/cities/weather?code=1234");
 
         expect(response.status).to.equal(400);
+    });
+    it("Sucess when you enter a valid city code", async () => {
+        const response : any = await supertest(app).get("/api/cities/weather?code=67482");
+
+        expect(response.status).to.equal(200);
     });
 });
