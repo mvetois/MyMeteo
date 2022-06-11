@@ -1,20 +1,23 @@
-import { useState } from "react";
-import { ComponentProps } from "react";
-import { StyleSheet, TextInput, SafeAreaView, Button  } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View, useThemeColor } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
-import useColorScheme from "../hooks/useColorScheme";
+import { useState, ComponentProps } from "react";
+import { StyleSheet, TextInput, Button  } from "react-native";
 import axios from "axios";
 
-const search = async (name: string) => {
-    const response = await axios.get("http://mymeteo.mvetois.fr:5000/api/cities/find?param=" + name.toLowerCase().replace(/\s/g, '')).catch(() => {});
+import { MaterialIcons } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { RootTabScreenProps } from "../types";
+import { Text, View, useThemeColor } from "../components/Themed";
+import useColorScheme from "../hooks/useColorScheme";
+
+const search = async (name: string, navigation: any) => {
+    const response = await axios.get("https://mymeteo.mvetois.fr/api/cities/find?param=" + name.toLowerCase().replace(/\s/g, '')).catch(() => {});
     if (!response) {
         alert ("La ville '" + name + "' n'existe pas");
         return;
     }
-    alert (response.data[0].name);
+    await AsyncStorage.setItem("city", JSON.stringify(response.data));
+    alert (await AsyncStorage.getItem("city"));
+    navigation.navigate("Modal")
 }
 
 const Icon = (props: { name: ComponentProps<typeof MaterialIcons>["name"]; color: string; style : any ; size: number}) => {
@@ -30,8 +33,7 @@ const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabOne">) => {
             <Icon name="search" color={color} style={styles.icon} size={150} />
             <Text style={styles.title}>Choix de la ville</Text>
             <TextInput onChangeText={setText} value={text} style={useColorScheme() == "dark" ? styles.inputDark: styles.inputLight} />
-            <Button title="Rechercher" onPress={async () => await search(text)} />
-            {/* <Button title="Go to Modal" onPress={() => navigation.navigate("Modal")} /> */}
+            <Button title="Rechercher" onPress={async () => await search(text, navigation)} />
         </View>
     );
 }

@@ -14,9 +14,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
     return (
-        <NavigationContainer
-            linking={LinkingConfiguration}
-            theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <NavigationContainer linking={LinkingConfiguration} theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
             <RootNavigator />
         </NavigationContainer>
     );
@@ -32,7 +30,7 @@ function RootNavigator() {
             <Stack.Screen name="Root" component={TabOneScreen} options={{ title: "Choix de la ville" }} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />
             <Stack.Group screenOptions={{ presentation: "modal" }}>
-                <Stack.Screen name="Modal" component={ModalScreen} />
+                <Stack.Screen name="Modal" component={ModalScreen} options={{ title: "Météo"}} />
             </Stack.Group>
         </Stack.Navigator>
     );
