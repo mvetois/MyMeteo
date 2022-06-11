@@ -15,8 +15,7 @@ const search = async (name: string, navigation: any) => {
         alert ("La ville '" + name + "' n'existe pas");
         return;
     }
-    await AsyncStorage.setItem("city", JSON.stringify(response.data));
-    alert (await AsyncStorage.getItem("city"));
+    await AsyncStorage.setItem("city", JSON.stringify(response.data[0]));
     navigation.navigate("Modal")
 }
 

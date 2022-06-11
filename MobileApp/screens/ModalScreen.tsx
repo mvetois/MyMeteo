@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ComponentProps } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet, Image } from "react-native";
 import axios from "axios";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Text, View } from "../components/Themed";
-import { capitalize } from "../components/utils";
+import { capitalize, weatherCode, Weather, City, windDir } from "../components/utils";
 
 const checkStorage = async () : Promise<any> => {
     const city = await AsyncStorage.getItem("city");
@@ -16,29 +16,41 @@ const checkStorage = async () : Promise<any> => {
     return undefined;
 }
 
-const getWeather = async (code: string) => {
+const getWeather = async (code: number) : Promise<Weather | {}> => {
     const response = await axios.get("https://mymeteo.mvetois.fr/api/cities/weather?code=" + code).catch(() => {});
     if (!response)
-        return (undefined);
+        return ({});
     return (response.data);
 }
 
 const ModalScreen = () => {
-    const [city, setCity] = useState({});
-    const [weather, setWeather] = useState({});
+    const [city, setCity] = useState({} as City);
+    const [weather, setWeather] = useState({} as Weather);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         checkStorage().then((c) => setCity(c));
         if (isLoading && city?.code)
-            getWeather(city.code).then((w) => setWeather(w)).finally(() => setIsLoading(false));
+            getWeather(city.code).then((w) => setWeather(w as Weather)).finally(() => setIsLoading(false));
     });
     return (
-            <View style={styles.container}>
-            <Text style={styles.title}>{city ? capitalize(city.name): "Test"}</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <Text>{city ? JSON.stringify(city) : ""}</Text>
-            <Text>{weather ? JSON.stringify(weather) : ""}</Text>
+        <View style={styles.container}>
+            {weather ? <Image source={{ uri: weatherCode(weather?.data?.current_weather?.weathercode) }} style={styles.image} /> : <></> }
+
+            <Text style={styles.title}>{city ? capitalize(weather?.city?.name): "Test"}</Text>
+
+            {weather ?
+                <View>
+                    <Text>Dépatement : {weather?.city?.nameDpt}</Text>
+                    <Text> </Text>
+                    <Text>{weather?.city?.codePst?.length <= 1 ? "Code postal :" : "Code postaux :"}</Text>
+                    <Text>{weather?.city?.codePst.map(x => x + " ")} </Text>
+                    <Text> </Text>
+                    <Text>Tempétature : {weather?.data?.current_weather?.temperature} °C</Text>
+                    <Text>Vent : {weather?.data?.current_weather?.windspeed} Km/h</Text>
+                    <Text>Direction : {windDir(weather?.data?.current_weather?.winddirection)}</Text>
+                </View>
+            : <></> }
 
             {/* Use a light status bar on iOS to account for the black space above the modal */}
             <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
@@ -54,12 +66,14 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     title: {
-        fontSize: 20,
+        fontSize: 40,
         fontWeight: "bold",
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: "80%",
+    image : {
+        width: 100,
+        height: 100
     },
+    bold: {
+        fontWeight: "bold"
+    }
 });
