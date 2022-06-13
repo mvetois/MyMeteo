@@ -9,6 +9,12 @@ import { RootTabScreenProps } from "../types";
 import { Text, View, useThemeColor } from "../components/Themed";
 import useColorScheme from "../hooks/useColorScheme";
 
+const lookIfOnline = async (navigation: any) => {
+    await axios.get("https://mymeteo.mvetois.fr/api/").catch(() => {
+        navigation.navigate("NotFound");
+    });
+}
+
 const search = async (name: string, navigation: any) => {
     const response = await axios.get("https://mymeteo.mvetois.fr/api/cities/find?param=" + name.toLowerCase().replace(/\s/g, '')).catch(() => {});
     if (!response) {
@@ -24,9 +30,9 @@ const Icon = (props: { name: ComponentProps<typeof MaterialIcons>["name"]; color
 }
 
 const TabOneScreen = ({ navigation }: RootTabScreenProps<"TabOne">) => {
+    lookIfOnline(navigation);
     const color = useThemeColor({}, "text");
     const [text, setText] = useState("");
-
     return (
         <View style={styles.container}>
             <Icon name="search" color={color} style={styles.icon} size={150} />
