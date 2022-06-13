@@ -29,7 +29,8 @@ const ModalScreen = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        checkStorage().then((c) => setCity(c));
+        if (isLoading)
+            checkStorage().then((c) => setCity(c));
         if (isLoading && city?.code)
             getWeather(city.code).then((w) => setWeather(w as Weather)).finally(() => setIsLoading(false));
     });
