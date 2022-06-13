@@ -42,12 +42,12 @@ const ModalScreen = () => {
 
             {weather ?
                 <View>
-                    <Text>Dépatement : {weather?.city?.nameDpt}</Text>
+                    <Text>Département : {weather?.city?.nameDpt}</Text>
                     <Text> </Text>
                     <Text>{weather?.city?.codePst?.length <= 1 ? "Code postal :" : "Code postaux :"}</Text>
                     <Text>{weather?.city?.codePst.map(x => x + " ")} </Text>
                     <Text> </Text>
-                    <Text>Tempétature : {weather?.data?.current_weather?.temperature} °C</Text>
+                    <Text>Température : {weather?.data?.current_weather?.temperature} °C</Text>
                     <Text>Vent : {weather?.data?.current_weather?.windspeed} Km/h</Text>
                     <Text>Direction : {windDir(weather?.data?.current_weather?.winddirection)}</Text>
                 </View>
