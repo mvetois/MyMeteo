@@ -1,10 +1,10 @@
-import react from "react";
+import React from "react";
 
 const Error = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <p>Une erreur est survenue, veuillez réessayer plus tard</p>
+                <h2>Une erreur est survenue, veuillez réessayer plus tard</h2>
             </header>
         </div>
     );

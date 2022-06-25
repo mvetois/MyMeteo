@@ -16,14 +16,7 @@ const App = () => {
         setIsOnline(false);
         setIsLoading(false);
     });
-    if (isLoading) {
-        return (
-            <div className="loader"></div>
-        );
-    }
-    return (<>
-        {isLoading ? <div className="loader"></div> : !isOnline ? <Error /> : <Search />}
-    </>);
+    return (isLoading ? <div className="loader"></div> : !isOnline ? <Error /> : <Search />);
 }
 
 export default App;
