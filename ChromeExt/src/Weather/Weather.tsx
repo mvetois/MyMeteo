@@ -18,7 +18,7 @@ const WeatherComponent = (props : {city : City}) => {
             <h2>{capitalize(weather?.city?.name)}</h2>
             {weather ? <>
                 <p>Département : {weather?.city?.nameDpt} ({weather?.city?.codeDpt})</p>
-                <p> {weather?.city?.codePst?.length <= 1 ? "Code postal :" : "Code postaux :"} {weather?.city?.codePst.map(x => x + " ")} </p>
+                <p style={{ lineHeight: 1 }}>{weather?.city?.codePst?.length <= 1 ? "Code postal :" : "Code postaux :"} {weather?.city?.codePst.map(x => x + " ")}</p>
                 <p>Température : {weather?.data?.current_weather?.temperature}°C</p>
                 <p>Vent : {weather?.data?.current_weather?.windspeed} km/h</p>
                 <p>Direction : {windDir(weather?.data?.current_weather?.winddirection)}</p>
