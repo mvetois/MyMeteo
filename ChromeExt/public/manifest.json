@@ -1,0 +1,15 @@
+{
+  "short_name": "MyMeteo",
+  "name": "MyMeteo",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "MyMeteo"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
