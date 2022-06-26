@@ -1,3 +1,5 @@
+export const backendUrl : string = "http://localhost:5000";
+
 export interface City {
     code: number,
     codeDpt: number,

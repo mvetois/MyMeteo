@@ -15,6 +15,10 @@ To install the dependencies, run the following command:
 $> npm install
 ```
 
+## Configuration of the extension
+
+You need to configure the url of the backend server, you need to edit the first line of the file `/src/utils.ts` with your backend url.
+
 ## Starting the developpement environment
 
 ```bash
