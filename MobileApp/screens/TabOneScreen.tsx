@@ -8,15 +8,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootTabScreenProps } from "../types";
 import { Text, View, useThemeColor } from "../components/Themed";
 import useColorScheme from "../hooks/useColorScheme";
+import { backendUrl } from "../components/utils";
 
 const lookIfOnline = async (navigation: any) => {
-    await axios.get("https://mymeteo.mvetois.fr/api/").catch(() => {
+    await axios.get(backendUrl + "/api/").catch(() => {
         navigation.navigate("NotFound");
     });
 }
 
 const search = async (name: string, navigation: any) => {
-    const response = await axios.get("https://mymeteo.mvetois.fr/api/cities/find?param=" + name.toLowerCase().replace(/\s/g, '')).catch(() => {});
+    const response = await axios.get(backendUrl + "/api/cities/find?param=" + name.toLowerCase().replace(/\s/g, '')).catch(() => {});
     if (!response) {
         alert ("La ville '" + name + "' n'existe pas");
         return;

@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Weather from "../Weather/Weather";
 
-import { City } from "../utils";
+import { City, backendUrl } from "../utils";
 
 const Search = () => {
     const [input, setInput] = useState("");
@@ -12,7 +12,7 @@ const Search = () => {
     const [errorDisplay, setErrorDisplay] = useState(false);
 
     const searchFrominput = () => {
-        axios.get("https://mymeteo.mvetois.fr/api/cities/find?param=" + input.toLowerCase().replace(/\s/g, '')).then((res) => {
+        axios.get(backendUrl + "/api/cities/find?param=" + input.toLowerCase().replace(/\s/g, '')).then((res) => {
             setSearch(res.data[0]);
             setIsLoading(false);
             setErrorDisplay(false);

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import { City, Weather, capitalize, weatherCode, windDir } from "../utils";
+import { City, Weather, capitalize, weatherCode, windDir, backendUrl } from "../utils";
 
 const WeatherComponent = (props : {city : City}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [weather, setWeather] = useState({} as Weather);
     if (isLoading) {
-        axios.get("https://mymeteo.mvetois.fr/api/cities/weather?code=" + props.city.code).then((res) => {
+        axios.get(backendUrl + "/api/cities/weather?code=" + props.city.code).then((res) => {
             setWeather(res.data);
             setIsLoading(false);
         }).catch(() => {});

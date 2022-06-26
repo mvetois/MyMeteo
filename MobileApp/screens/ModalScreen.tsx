@@ -6,7 +6,7 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Text, View } from "../components/Themed";
-import { capitalize, weatherCode, Weather, City, windDir } from "../components/utils";
+import { capitalize, weatherCode, Weather, City, windDir, backendUrl } from "../components/utils";
 
 const checkStorage = async () : Promise<any> => {
     const city = await AsyncStorage.getItem("city");
@@ -17,7 +17,7 @@ const checkStorage = async () : Promise<any> => {
 }
 
 const getWeather = async (code: number) : Promise<Weather | {}> => {
-    const response = await axios.get("https://mymeteo.mvetois.fr/api/cities/weather?code=" + code).catch(() => {});
+    const response = await axios.get(backendUrl + "/api/cities/weather?code=" + code).catch(() => {});
     if (!response)
         return ({});
     return (response.data);
