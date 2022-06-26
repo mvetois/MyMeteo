@@ -19,6 +19,10 @@ To install the dependencies, run the following command:
 $> npm install
 ```
 
+## Configuration of the Mobile app
+
+You need to configure the url of the backend server, you need to edit the first line of the file `/src/components/utils.ts` with your backend url.
+
 ## Starting the developpement environment
 
 ```bash
